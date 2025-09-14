@@ -67,5 +67,4 @@ python run.py
      -Password: 12345678
 
 7. Log into any of these and you can create problems which other users can solve!
-## Setup Instructions
-1. Clone this repository
+
