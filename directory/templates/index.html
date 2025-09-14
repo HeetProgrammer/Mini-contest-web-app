@@ -27,8 +27,9 @@ Home Page
  
 
 {% else %}
-  <h1 class="my-5 text-center">Unsolved Problems</h1>
-  <h3 class="my-5 text-center">Your current score is: {{ current_user.score }}</h3>
+  <h1 class="my-5 text-center">Your current score is: {{ current_user.score }}</h1>
+  <h2 class="my-5 text-center">Unsolved Problems</h2>
+  
 
   {% for problem in problems %}
   {% if not problem in current_user.solved_problems %}
@@ -45,7 +46,7 @@ Home Page
     
   {% endfor %}
 
-  <h1 class="my-5 text-center">Solved Problems</h1>
+  <h2 class="my-5 text-center">Solved Problems</h2>
   {% for problem in problems %}
   {% if problem in current_user.solved_problems %}
     <div class="card my-5 container" style="width: 18rem; background-color:darkkhaki">
