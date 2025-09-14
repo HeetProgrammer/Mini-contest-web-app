@@ -40,8 +40,8 @@ class ProblemForm(FlaskForm):
 class SolveProblemForm(FlaskForm):
     def validate_user_output(self, user_output):
         if user_output.data:
-            user_output = user_output.data.strip()
-        if not user_output and not self.code_file.data:
+            user_output.data = user_output.data.strip()
+        if not user_output.data and not self.code_file.data:
             return False     
         return True
 

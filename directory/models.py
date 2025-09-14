@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     password_hashed = db.Column(db.String(length=60), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     solved_problems = db.relationship('Problem', secondary=user_solved_problems)
+    score = db.Column(db.Integer, default=0)
     @property
     def password(self):
         return self.password

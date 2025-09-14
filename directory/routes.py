@@ -90,6 +90,8 @@ def view_problem(problem_id):
                 if form.user_output.data.strip():
                     if form.user_output.data == problem.sample_output:
                         flash(f"Congratulations!You solved the problem correctly", category="success")
+                        current_user.score += 10
+                        db.session.commit()
                     else:
                         flash(f"Sorry!You solved the problem incorrectly. Better luck next time!", category="danger")
                 
@@ -118,6 +120,17 @@ def view_problem(problem_id):
     
 
     return render_template("problem.html", problem=problem, form=form)
+
+
+@app.route("/leaderboard")
+def view_leaderboard():
+    users = User.query.order_by(User.score.desc()).all()
+    users_without_admins = []
+    for user in users:
+        if not user.is_admin:
+            users_without_admins.append(user)
+    
+    return render_template("leaderboard.html", users=users_without_admins)
 
 
 
