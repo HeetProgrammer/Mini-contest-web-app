@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add problem
+{% endblock%}
+
+{% block content %}
+<h1 class="text-center my-5">Add Problem</h1>
+<div class="container">
+    <form action="" method="post" class="my-5" autocomplete="off">
+        {{ form.hidden_tag() }}
+        {{ form.title.label() }}
+    {{ form.title(class="form-control", placeholder="Problem Title", autocomplete="off")}}
+    <br>
+    {{ form.description.label() }}
+    {{ form.description(class="form-control", placeholder="Problem Description", autocomplete="off")}}
+    <br>
+    {{ form.sample_input.label() }}
+    {{ form.sample_input(class="form-control", placeholder="Enter Sample Input", autocomplete="off")}}
+    <br>
+    {{ form.sample_output.label() }}
+    {{ form.sample_output(class="form-control", placeholder="Enter Sample Output", autocomplete="off")}}
+    <br>
+    {{ form.submit(class="btn btn-lg btn-success")}}
+    </form>
+</div>
+    
+{% endblock %}

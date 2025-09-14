@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ problem.title }}
+{% endblock title %}
+
+{% block content %}
+<h1 margin="50%">{{ problem.title }}</h1>
+<br>
+<br>
+<p>{{ problem.description }}</p>
+<br>
+<br>
+
+<h3>Sample Input</h3>
+<pre>{{ problem.sample_input }}</pre>
+<br><br>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <div class="form-group">
+        {{ form.user_output.label }}
+        {{ form.user_output(class="form-control", rows="5", placeholder="Enter expected output here") }}
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        {{ form.code_file.label }}
+        {{ form.code_file(class="form-control") }}
+    </div>
+
+    <br>
+    {{ form.submit(class="btn btn-success") }}
+</form>
+
+
+
+
+
+{% endblock %}

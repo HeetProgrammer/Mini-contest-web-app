@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
-from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField
+from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, Optional
 from directory.models import User
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 
 class RegisterForm(FlaskForm):
     def validate_username(self, username_to_validate):
@@ -27,3 +28,28 @@ class LoginForm(FlaskForm):
     username = StringField(label='Username', validators=[DataRequired()])
     password = PasswordField(label='Password', validators=[DataRequired()])
     submit = SubmitField(label='Login')
+
+
+class ProblemForm(FlaskForm):
+    title = StringField(label='Problem Title', validators=[DataRequired(), Length(max=100)])
+    description = TextAreaField(label="Problem Description", validators=[DataRequired()])
+    sample_input = TextAreaField(label="Sample Input", validators=[DataRequired()])
+    sample_output = TextAreaField(label="Sample Output", validators=[DataRequired()])
+    submit = SubmitField(label="Add Problem")
+
+class SolveProblemForm(FlaskForm):
+    def validate_user_output(self, user_output):
+        if user_output.data:
+            user_output = user_output.data.strip()
+        if not user_output and not self.code_file.data:
+            return False     
+        return True
+
+    user_output = TextAreaField(label="Enter Output", validators=[Optional()])
+    code_file = FileField(label="Upload Python File",
+                          validators=[
+                              Optional(),
+                              FileAllowed(['py'], "Only .py files are allowed!")
+                          ])
+    submit = SubmitField(label="Submit Solution")
+   
